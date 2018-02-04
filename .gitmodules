@@ -1,0 +1,6 @@
+[submodule "php/phpstorm-settings"]
+	path = php/phpstorm-settings
+	url = https://github.com/knpuniversity/phpstorm-settings.git
+[submodule "php/symfony-coding-standard"]
+	path = php/symfony-coding-standard
+	url = https://github.com/djoos/Symfony-coding-standard.git
