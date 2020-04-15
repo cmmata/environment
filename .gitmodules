@@ -4,3 +4,6 @@
 [submodule "php/symfony-coding-standard"]
 	path = php/symfony-coding-standard
 	url = https://github.com/djoos/Symfony-coding-standard.git
+[submodule "cursors/capitaine-cursors"]
+	path = cursors/capitaine-cursors
+	url = https://github.com/keeferrourke/capitaine-cursors.git
