@@ -7,3 +7,6 @@
 [submodule "cursors/capitaine-cursors"]
 	path = cursors/capitaine-cursors
 	url = https://github.com/keeferrourke/capitaine-cursors.git
+[submodule "fonts/FiraCode"]
+	path = fonts/FiraCode
+	url = https://github.com/tonsky/FiraCode.git
