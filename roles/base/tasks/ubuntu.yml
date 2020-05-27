@@ -1,0 +1,27 @@
+---
+- name: Add keepassxc repository
+  apt_repository:
+    repo: ppa:phoerious/keepassxc
+
+- name: Install modules with apt
+  apt:
+    name:
+      - chromium-browser
+      - firefox
+      - gimp
+      - kate
+      - kdeconnect
+      - keepassxc
+      - kontact
+      - myspell-es
+      - vlc
+    state: present
+
+- name: Symlink Nord dir_colors
+  become: false
+  file:
+    src: "{{playbook_dir}}/themes/nord-dircolors/src/dir_colors"
+    dest: "~/.dir_colors"
+    state: link
+
+# copy test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors) to .zshrc

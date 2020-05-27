@@ -1,0 +1,18 @@
+---
+- name: Install base packages
+  hosts: development
+  become: true
+  become_method: sudo
+  roles:
+    - base
+  tags:
+    - base
+
+- name: Install development toolset
+  hosts: development
+  become: true
+  become_method: sudo
+  roles:
+    - role: development
+  tags:
+    - develop

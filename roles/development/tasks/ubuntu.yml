@@ -1,0 +1,124 @@
+---
+# curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+- name: Add Docker PGP key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+    filename: docker-ce
+
+- name: Add MariaDB repository
+  apt_repository:
+    repo: deb [arch=ppc64el,amd64,arm64] http://ftp.heanet.ie/mirrors/mariadb/repo/10.4/ubuntu bionic main
+    state: present
+    filename: MariaDB
+
+- name: Install Atom
+  apt:
+    deb: https://atom.io/download/deb?channel=beta
+
+- name: Install modules with apt
+  apt:
+    name:
+      - ansible-lint
+      - apt-transport-https
+      - bat
+      - docker-ce
+      - docker-ce-cli
+      - docker-compose
+      - ca-certificates
+      - containerd.io
+      - curl
+      - git
+      - gnupg-agent
+      - kompare
+      - mariadb-client
+      - nodejs
+      - php
+      - php-apcu
+      - php-curl
+      - php-dev
+      - php-gd
+      - php-igbinary
+      - php-intl
+      - php-mbstring
+      - php-mysql
+      - php-odbc
+      - php-pear
+      - php-pcov
+      - php-pgsql
+      - php-redis
+      - php-soap
+      - php-xdebug
+      - php-xml
+      - php-yaml
+      - php-zip
+      - postgresql-client-10
+      - postgresql-client-common
+      - python3-pip
+      - shellcheck
+      - software-properties-common
+      - unixodbc-dev
+      - yakuake
+      - zsh
+    state: present
+    update_cache: yes
+
+- name: Install pecl modules
+  pear:
+    name:
+      - sqlsrv
+      - pdo_sqlsrv
+    state: present
+
+- name: Configure sqlsrv
+  lineinfile:
+    path: /etc/php/7.4/mods-available/sqlsrv.ini
+    line: "; priority=20\nextension=sqlsrv.so\n"
+    create: yes
+
+- name: Configure pdo-sqlsrv
+  lineinfile:
+    path: /etc/php/7.4/mods-available/pdo_sqlsrv.ini
+    line: "; priority=30\nextension=pdo_sqlsrv.so\n"
+    create: yes
+
+- name: Configure sqlsrv and pdo-sqlsrv
+  command: phpenmod -v 7.4 sqlsrv pdo_sqlsrv
+
+- name: Symlink apm-beta to apm
+  file:
+    src: /usr/bin/apm-beta
+    dest: /usr/bin/apm
+    state: link
+
+- name: Install atom packages
+  include_role:
+    name: gantsign.atom-packages
+  vars:
+    users:
+      - username: appsinet
+        atom_packages:
+          - gl-light-syntax
+          - linter
+          - atom-beautify
+          - file-icons
+          - octocat-syntax
+          - linter-shellcheck
+          - language-docker
+          - docker
+          - linter-docker
+
+- name: Install pip modules
+  pip:
+    name:
+      - tldr
+      - pygments
+    executable: pip3
+
+# export PATH=$HOME/bin:/usr/local/bin:/home/appsinet/projects/lib/sdk/flutter/bin:/home/appsinet/projects/lib/sdk/android-sdk/platform-tools:./node_modules/.bin/:./vendor/bin/:/home/appsinet/.local/bin:$PATH
+# plugins zshrc= ansible colorize command-not-found composer docker docker-compose git git-flow gulp gradle npm pip symfony symfony2 ubuntu yarn

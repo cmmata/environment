@@ -1,0 +1,37 @@
+version: '3'
+services:
+    mariadb:
+      image: mariadb:10.4
+      environment:
+        MYSQL_ROOT_PASSWORD: rootPwd
+        # MYSQL_DATABASE: extranet
+        # MYSQL_USER: promoUser
+        # MYSQL_PASSWORD: 4CtHK5fLJUHz66EX
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "200k"
+          max-file: "10"
+      restart: on-failure
+      volumes:
+        - ./data/mariadb:/var/lib/mysql
+      user: mysql
+      ports:
+        - "3306:3306"
+
+    postgre:
+      image: postgres
+      environment:
+        POSTGRES_PASSWORD: postgrePWD
+      volumes:
+        - ./data/postgre:/var/lib/postgresql
+      ports:
+        - "5432:5432"
+
+    redis:
+      image: redis
+      ports:
+        - "6379:6379"
+      volumes:
+        - "./data/redis:/data"
+      command: redis-server --appendonly yes

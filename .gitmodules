@@ -5,8 +5,11 @@
 	path = php/symfony-coding-standard
 	url = https://github.com/djoos/Symfony-coding-standard.git
 [submodule "cursors/capitaine-cursors"]
-	path = cursors/capitaine-cursors
+	path = themes/cursors/capitaine-cursors
 	url = https://github.com/keeferrourke/capitaine-cursors.git
 [submodule "fonts/FiraCode"]
 	path = fonts/FiraCode
 	url = https://github.com/tonsky/FiraCode.git
+[submodule "themes/nord-dircolors"]
+	path = themes/nord-dircolors
+	url = https://github.com/arcticicestudio/nord-dircolors.git

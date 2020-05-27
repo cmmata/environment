@@ -1,1 +1,7 @@
 fonts/Input
+vault_pass.txt
+data/*
+!data/.gitkeep
+roles/*
+!roles/base
+!roles/development
